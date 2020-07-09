@@ -1,0 +1,6 @@
+{
+  "name": "drupal/email_messages",
+  "description": "Provides a configuration entity used for storing and translating messages to be used for emails.",
+  "type": "drupal-module",
+  "minimum-stability": "dev"
+}
