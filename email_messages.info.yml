@@ -1,0 +1,5 @@
+name: email_messages
+type: module
+description: 'Provides a way to create and manage messages to be sent out as notifications.'
+package: Custom
+core_version_requirement: ^8 || ^9

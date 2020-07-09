@@ -1,0 +1,13 @@
+email_messages.email_message.*:
+  type: config_entity
+  label: Email Message
+  mapping:
+    id:
+      type: string
+      label: ID
+    subject:
+      type: label
+      label: Subject
+    message:
+      type: text_format
+      label: Message

@@ -1,0 +1,31 @@
+entity.email_message.collection:
+  path: '/admin/structure/email-message'
+  defaults:
+    _entity_list: 'email_message'
+    _title: 'Email messages'
+  requirements:
+    _permission: 'administer email messages'
+
+entity.email_message.add_form:
+  path: '/admin/structure/email_message/add'
+  defaults:
+    _entity_form: 'email_message.add'
+    _title: 'Add message'
+  requirements:
+    _permission: 'administer email messages'
+
+entity.email_message.edit_form:
+  path: '/admin/structure/email-message/{email_message}'
+  defaults:
+    _entity_form: 'email_message.edit'
+    _title: 'Edit message'
+  requirements:
+    _permission: 'administer email messages'
+
+entity.email_message.delete_form:
+  path: '/admin/structure/email-message/{email_message}/delete'
+  defaults:
+    _entity_form: 'email_message.delete'
+    _title: 'Delete message'
+  requirements:
+    _permission: 'administer email messages'

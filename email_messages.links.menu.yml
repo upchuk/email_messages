@@ -1,0 +1,5 @@
+entity.email_message.overview:
+  title: Email Messages
+  parent: system.admin_structure
+  description: 'List of email messages.'
+  route_name: entity.email_message.collection
