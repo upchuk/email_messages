@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * Implements hook_mail().
+ */
+function email_messages_mail($key, &$message, $params) {
+  $message['headers']['Content-Type'] = 'text/html';
+
+  switch ($key) {
+    case 'notification':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = $params['subject'];
+      $message['body'][] = $params['message'];
+      break;
+  }
+}
