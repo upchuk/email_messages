@@ -33,22 +33,7 @@ class EmailMessageManager {
   protected $mailManager;
 
   /**
-   * @var \Drupal\Core\Theme\ThemeManagerInterface
-   */
-  protected $themeManager;
-
-  /**
-   * @var \Drupal\Core\Theme\ThemeInitializationInterface
-   */
-  protected $themeInitialization;
-
-  /**
-   * @var \Drupal\Core\Extension\ThemeHandlerInterface
-   */
-  protected $themeHandler;
-
-  /**
-   * @var \Drupal\Core\Render\RendererInterface
+   * @var \Drupal\email_messages\EmailMessageRenderer
    */
   protected $renderer;
 
@@ -58,18 +43,12 @@ class EmailMessageManager {
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
    * @param \Drupal\Core\Mail\MailManagerInterface $mailManager
-   * @param \Drupal\Core\Theme\ThemeManagerInterface $themeManager
-   * @param \Drupal\Core\Theme\ThemeInitializationInterface $themeInitialization
-   * @param \Drupal\Core\Extension\ThemeHandlerInterface $themeHandler
-   * @param \Drupal\Core\Render\RendererInterface $renderer
+   * @param \Drupal\email_messages\EmailMessageRenderer $renderer
    */
-  public function __construct(EntityTypeManagerInterface $entityTypeManager, LanguageManagerInterface $languageManager, MailManagerInterface $mailManager, ThemeManagerInterface $themeManager, ThemeInitializationInterface $themeInitialization, ThemeHandlerInterface $themeHandler, RendererInterface $renderer) {
+  public function __construct(EntityTypeManagerInterface $entityTypeManager, LanguageManagerInterface $languageManager, MailManagerInterface $mailManager, EmailMessageRenderer $renderer) {
     $this->entityTypeManager = $entityTypeManager;
     $this->languageManager = $languageManager;
     $this->mailManager = $mailManager;
-    $this->themeManager = $themeManager;
-    $this->themeInitialization = $themeInitialization;
-    $this->themeHandler = $themeHandler;
     $this->renderer = $renderer;
   }
 
@@ -139,34 +118,8 @@ class EmailMessageManager {
       ];
     }
 
-    $active_theme = $this->setRenderTheme();
-    $params['message'] = $this->renderer->executeInRenderContext(new RenderContext(), function () use ($params) {
-      return $this->renderer->render($params['message']);
-    });
-    $this->restoreDefaultTheme($active_theme);
+    $params['message'] = $this->renderer->render($params['message']);
 
     return $this->mailManager->mail($module, $key, $to, $message->language()->getId(), $params, $reply, $send);
-  }
-
-  /**
-   * Sets the render theme and returns the original.
-   *
-   * @return \Drupal\Core\Theme\ActiveTheme
-   * @throws \Drupal\Core\Theme\MissingThemeDependencyException
-   */
-  protected function setRenderTheme() {
-    $active_theme = $this->themeManager->getActiveTheme();
-    $frontend_theme = $this->themeInitialization->getActiveThemeByName($this->themeHandler->getDefault());
-    $this->themeManager->setActiveTheme($frontend_theme);
-    return $active_theme;
-  }
-
-  /**
-   * Restores the original theme.
-   *
-   * @param $active_theme
-   */
-  protected function restoreDefaultTheme($active_theme) {
-    $this->themeManager->setActiveTheme($active_theme);
   }
 }
