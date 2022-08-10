@@ -1,0 +1,21 @@
+<?php
+
+use Drupal\Core\Config\FileStorage;
+
+/**
+ * Creates the email messages log entity type.
+ */
+function email_messages_update_9001() {
+  $definition = \Drupal::entityTypeManager()->getDefinition('email_message_log');
+  \Drupal::entityDefinitionUpdateManager()->installEntityType($definition);
+
+}
+
+/**
+ * Creates the email messages log view.
+ */
+function email_messages_update_9002() {
+  $storage = new FileStorage(\Drupal::service('extension.list.module')->getPath('email_messages') . '/config/install');
+  $config = $storage->read('views.view.email_message_logs');
+  \Drupal::entityTypeManager()->getStorage('view')->createFromStorageRecord($config)->save();
+}

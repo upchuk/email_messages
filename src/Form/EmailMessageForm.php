@@ -46,6 +46,13 @@ class EmailMessageForm extends EntityForm {
       '#format' => $default ? $default['format'] : 'basic_html',
     ];
 
+    $form['log_message'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Log the message'),
+      '#description' => $this->t('Check this box if you would like to create a log each time an email with this message goes out.'),
+      '#default_value' => $this->entity->get('log_message')
+    ];
+
     return $form;
   }
 

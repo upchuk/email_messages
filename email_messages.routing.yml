@@ -29,3 +29,11 @@ entity.email_message.delete_form:
     _title: 'Delete message'
   requirements:
     _permission: 'administer email messages'
+
+entity.email_message_log.settings:
+  path: 'admin/structure/email-message-log'
+  defaults:
+    _form: '\Drupal\email_messages\Form\EmailMessageLogSettingsForm'
+    _title: 'Message Log'
+  requirements:
+    _permission: 'administer message log'

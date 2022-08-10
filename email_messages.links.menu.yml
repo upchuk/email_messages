@@ -3,3 +3,13 @@ entity.email_message.overview:
   parent: system.admin_structure
   description: 'List of email messages.'
   route_name: entity.email_message.collection
+entity.email_message_log.settings:
+  title: Message Log Settings
+  description: Configure a Message Log entity type
+  route_name:  entity.email_message_log.settings
+  parent: system.admin_structure
+entity.email_message_log.collection:
+  title: Message Logs
+  description: List of message logs
+  route_name: entity.email_message_log.collection
+  parent: system.admin_structure

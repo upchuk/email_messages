@@ -22,4 +22,12 @@ interface EmailMessageInterface extends ConfigEntityInterface {
    * @return array
    */
   public function getMessage();
+
+  /**
+   * Returns whether it should log a message.
+   *
+   * @return bool
+   */
+  public function logsMessage();
+
 }

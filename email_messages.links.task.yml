@@ -1,0 +1,22 @@
+entity.email_message_log.settings:
+  title: Settings
+  route_name: entity.email_message_log.settings
+  base_route: entity.email_message_log.settings
+entity.email_message_log.view:
+  title: View
+  route_name: entity.email_message_log.canonical
+  base_route: entity.email_message_log.canonical
+entity.email_message_log.edit_form:
+  title: Edit
+  route_name: entity.email_message_log.edit_form
+  base_route: entity.email_message_log.canonical
+entity.email_message_log.delete_form:
+  title: Delete
+  route_name: entity.email_message_log.delete_form
+  base_route: entity.email_message_log.canonical
+  weight: 10
+entity.email_message_log.collection:
+  title: Message Log
+  route_name: entity.email_message_log.collection
+  base_route: system.admin_content
+  weight: 10

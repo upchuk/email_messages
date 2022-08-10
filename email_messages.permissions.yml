@@ -1,2 +1,7 @@
 administer email messages:
   title: 'Administer email messages'
+administer message log:
+  title: 'Administer message log settings'
+  restrict access: true
+access message log overview:
+  title: 'Access message log overview page'

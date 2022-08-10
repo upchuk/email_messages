@@ -11,3 +11,6 @@ email_messages.email_message.*:
     message:
       type: text_format
       label: Message
+    log_message:
+      type: boolean
+      label: Logs the message

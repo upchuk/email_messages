@@ -42,7 +42,8 @@ use Drupal\email_messages\EmailMessageInterface;
  *   config_export = {
  *     "id",
  *     "subject",
- *     "message"
+ *     "message",
+ *     "log_message"
  *   }
  * )
  */
@@ -69,6 +70,8 @@ class EmailMessage extends ConfigEntityBase implements EmailMessageInterface {
    */
   protected $message = [];
 
+  protected $log_message;
+
   /**
    * @inheritDoc
    */
@@ -81,5 +84,19 @@ class EmailMessage extends ConfigEntityBase implements EmailMessageInterface {
    */
   public function getMessage() {
     return $this->message;
+  }
+
+  /**
+   * @inheritDoc
+   */
+  public function logsMessage() {
+    return (bool) $this->log_message;
+  }
+
+  /**
+   * @inheritDoc
+   */
+  public function logMessage($log) {
+    $this->log_message = (bool) $log;
   }
 }

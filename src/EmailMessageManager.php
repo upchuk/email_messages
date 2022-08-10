@@ -11,6 +11,7 @@ use Drupal\Core\Render\RenderContext;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Theme\ThemeInitializationInterface;
 use Drupal\Core\Theme\ThemeManagerInterface;
+use Drupal\email_messages\Entity\EmailMessageLog;
 
 /**
  * Manages the email messages.
@@ -120,6 +121,22 @@ class EmailMessageManager {
 
     $params['message'] = $this->renderer->render($params['message']);
 
-    return $this->mailManager->mail($module, $key, $to, $message->language()->getId(), $params, $reply, $send);
+    $result = $this->mailManager->mail($module, $key, $to, $message->language()->getId(), $params, $reply, $send);
+
+    if ($message->logsMessage()) {
+      $values = $params['log_message_values'] ?? [];
+      $values += [
+        'rendered_message' => [
+          'value' => $params['message'],
+          'format' => $message->getMessage()['format'],
+        ],
+        'email' => $to,
+        'message' => $message->id(),
+        'language' => $message->language()->getId(),
+      ];
+      EmailMessageLog::create($values)->save();
+    }
+
+    return $result;
   }
 }

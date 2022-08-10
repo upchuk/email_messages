@@ -14,3 +14,11 @@ function email_messages_mail($key, &$message, $params) {
       break;
   }
 }
+
+/**
+ * Implements hook_views_data_alter().
+ */
+function email_messages_views_data_alter(&$data) {
+  $data['email_message_log']['uid']['filter']['id'] = 'user_name';
+  $data['email_message_log']['message']['filter']['id'] = 'email_message';
+}
