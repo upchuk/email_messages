@@ -94,7 +94,11 @@ class EmailMessageManager {
 
       if (is_array($value) && (isset($value['#type']) || isset($value['#theme']))) {
         $value = $this->renderer->render($value);
+        continue;
       }
+
+      // Otherwise, we cannot process it so we should replace with empty.
+      $value = '';
     }
 
     // Replace the message variables.
