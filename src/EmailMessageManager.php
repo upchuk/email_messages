@@ -86,10 +86,27 @@ class EmailMessageManager {
       return $entity;
     }
 
+    // Render each token if it's a render array.
+    foreach ($tokens as $token => &$value) {
+      if (is_string($value)) {
+        continue;
+      }
+
+      if (is_array($value) && (isset($value['#type']) || isset($value['#theme']))) {
+        $value = $this->renderer->render($value);
+      }
+    }
+
+    // Replace the message variables.
     $message = $entity->getMessage();
     $markup = new FormattableMarkup($message['value'], $tokens);
     $message['value'] = $markup->__toString();
     $entity->set('message', $message);
+
+    // Replace the subject variables.
+    $subject = $entity->getSubject();
+    $entity->set('subject', (new FormattableMarkup($subject, $tokens))->__toString());
+
     return $entity;
   }
 
