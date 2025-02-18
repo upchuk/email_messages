@@ -2,7 +2,6 @@ name: Email Messages
 type: module
 description: 'Provides a way to create and manage messages to be sent out as notifications.'
 package: Custom
-core_version_requirement: ^9 || ^10
-
+core_version_requirement: ^9 || ^10 || ^11
 dependencies:
   - drupal:text
